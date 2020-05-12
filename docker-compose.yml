@@ -1,0 +1,24 @@
+version: '3'
+volumes:
+  pgdata:
+services: 
+  python:
+    # image: python:3.8.2
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    volumes: 
+      - ./craigslist:/app
+    ports: 
+      - 8000:8000
+    # command: cd /app && pip install -r requirements.txt && python manage.py runserver
+  postgres:
+    image: postgres
+    environment: 
+      POSTGRES_USER: craigslist
+      POSTGRES_DB: craigslistdb
+      POSTGRES_PASS: craigslistpass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports: 
+      - 5432:5432
