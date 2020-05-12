@@ -75,10 +75,16 @@ WSGI_APPLICATION = 'craigslist.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# Change the database from sqlite3 to Postgresql
+# Here we set the HOST to 'postgres', because that will be run inside the container, and inside the container the host is postgres
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'craigslistdb',
+        'USER': 'craigslist',
+        'PASSWORD': 'craigslistpass',
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
 
